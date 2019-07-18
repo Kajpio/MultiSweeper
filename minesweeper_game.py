@@ -10,7 +10,7 @@ from network import *
 class Tableau():
     def __init__(self,longueur,largeur,coord=[]):
         if coord == []:
-            self.tab = init(longueur,largeur,pourcentage)
+            self.tab = init(longueur,largeur,0.2)
         else :
             self.tab = init2(longueur,largeur,coord)
         self.longueur = longueur
