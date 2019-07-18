@@ -8,7 +8,7 @@ import random
 import sys
 from network import *
 class Tableau():
-    def __init__(self,longueur,largeur,coord):
+    def __init__(self,longueur,largeur,coord=[]):
         if coord == []:
             self.tab = init(longueur,largeur,pourcentage)
         else :
