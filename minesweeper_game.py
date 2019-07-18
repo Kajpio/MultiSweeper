@@ -8,8 +8,11 @@ import random
 import sys
 from network import *
 class Tableau():
-    def __init__(self,longueur,largeur,pourcentage):
-        self.tab = init(longueur,largeur,pourcentage)
+    def __init__(self,longueur,largeur,coord):
+        if coord == []:
+            self.tab = init(longueur,largeur,pourcentage)
+        else :
+            self.tab = init2(longueur,largeur,coord)
         self.longueur = longueur
         self.largeur = largeur
         self.pourcentage = pourcentage
@@ -104,10 +107,8 @@ def set_bombs(tab,percentage):
         c = [a,b]
         if c not in bombes :
             bombes.append(c)
+            tab[c[0]][c[1]].bombe = True
             compteur +=1
-            for d in bombes:
-                tab[d[0]][d[1]].bombe = True
-                compteur +=1
     '''compteur = 0
     while compteur < n_bombs :
         for i in range(1,len(tab)-1):
@@ -116,7 +117,7 @@ def set_bombs(tab,percentage):
                     if rd() < percentage and tab[i][j].bombe !=True and compteur<n_bombs:
                         tab[i][j].bombe = True
                         compteur += 1'''
-    return tab
+    return tab, bombes
 
 def set_bombs2(tab,coord):
     for i in coord:
@@ -135,9 +136,9 @@ def how_many_bombs(tab):
 
 def init(m,n,percentage):
     tab = tableau(m,n)
-    set_bombs(tab,percentage)
+    tab, coord = set_bombs(tab,percentage)
     how_many_bombs(tab)
-    return tab
+    return tab, coord
 
 def init2(m,n,coord):
     tab = tableau(m,n)
