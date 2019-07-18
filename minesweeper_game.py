@@ -124,7 +124,6 @@ def set_bombs2(tab,coord):
     return tab
 
 def how_many_bombs(tab):
-    print(tab)
     for i in range(1, len(tab)-1):
         for j in range(1, len(tab[0])-1):
             if tab[i][j].bombe!=True:
