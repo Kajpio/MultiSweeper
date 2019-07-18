@@ -14,8 +14,7 @@ class Tableau():
         else :
             self.tab = init2(longueur,largeur,coord)
         self.longueur = longueur
-        self.largeur = largeur
-        self.pourcentage = pourcentage
+        self.largeur = largeur 
         self.game_over = "Game over"
         self.victory = "Victory!"
         self.cases_liberees = 0
@@ -27,7 +26,7 @@ class Tableau():
             else :
                 self.tab[i][j].open_case()
                 self.cases_liberees += 1
-                if self.cases_liberees >= ((self.longueur*self.largeur)-int(self.pourcentage*self.longueur*self.largeur)):
+                if self.cases_liberees >= ((self.longueur*self.largeur)-int(0.2*self.longueur*self.largeur)):
                         return self.victory
                 elif self.tab[i][j].n_bombe == 0 :
                     for k in [0,1,2]:
