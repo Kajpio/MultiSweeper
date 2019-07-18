@@ -90,8 +90,8 @@ def set_bombs(tab,percentage):
     bombes = []
     compteur = 0
     while compteur < n_bombs :
-        a = random.randint(1,4)
-        b = random.randint(1,5)
+        a = random.randint(1,len(tab))
+        b = random.randint(1,len(tab[0]))
         c = [a,b]
         if c not in bombes :
             bombes.append(c)
