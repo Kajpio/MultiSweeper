@@ -120,10 +120,11 @@ def set_bombs(tab,percentage):
 
 def set_bombs2(tab,coord):
     for i in coord:
-        tab[i[0]][i[1]]= True
+        tab[i[0]][i[1]].bombe = True
     return tab
 
 def how_many_bombs(tab):
+    print(tab)
     for i in range(1, len(tab)-1):
         for j in range(1, len(tab[0])-1):
             if tab[i][j].bombe!=True:
