@@ -6,6 +6,7 @@ This is a temporary script file.
 """
 import random
 import sys
+from network import *
 class Tableau():
     def __init__(self,longueur,largeur,pourcentage):
         self.tab = init(longueur,largeur,pourcentage)
@@ -134,19 +135,47 @@ def init(m,n,percentage):
     return tab
 
 gameOver = False
-def game(m,n):
-    t = Tableau(m,n,0.10)
+def singleplayerGame(m,n,p):
+    t = Tableau(m, n, 0.05)
     t.display()
-    while( not gameOver):
+    while not gameOver:
         print("What do you want to do ? :\n 1. Open a case \n 2. Flag a case")
-        userInput= input()
+        userInput = input()
         case = input("Which case ? (x,y) :")
         caseSplitted = list(map(int, case.split(",")))
-        if(userInput == '1'):
+        if (userInput == '1'):
             t.open_cases(caseSplitted[0], caseSplitted[1])
         else:
             t.flag_case(caseSplitted[0], caseSplitted[1])
         t.display()
     print("Game over")
 
-game(4,4)
+
+def hostingMutliplayerGameVersus(m, n, p):
+
+    s = connectTo("localhost")
+
+    pass
+
+def clientMultiplayerGameVersus(m,n,p):
+
+    s = startServer()
+    response = s.recv(4096).decode().split(" ")
+    if(response[0] == "MAP"):
+        pass
+    pass
+
+def multiplayerGameVersus(m,n,p):
+    userInput = input("Are you hosting ? (y\\n) :")
+    if(userInput == "y"):
+        hostingMutliplayerGameVersus(m,n,p)
+    else:
+        clientMultiplayerGameVersus(m,n,p)
+
+def game(m,n,p):
+
+    userInput = input("What mode do you want to play ? :\n 1. Singleplayer \n 2. Multiplayer")
+    if(userInput == "1"):
+        singleplayerGame(m,n,p)
+    else:
+        multiplayerGameVersus(m,n,p)
