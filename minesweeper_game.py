@@ -118,6 +118,11 @@ def set_bombs(tab,percentage):
                         compteur += 1'''
     return tab
 
+def set_bombs2(tab,coord):
+    for i in coord:
+        tab[i[0]][i[1]]= True
+    return tab
+
 def how_many_bombs(tab):
     for i in range(1, len(tab)-1):
         for j in range(1, len(tab[0])-1):
@@ -131,6 +136,12 @@ def how_many_bombs(tab):
 def init(m,n,percentage):
     tab = tableau(m,n)
     set_bombs(tab,percentage)
+    how_many_bombs(tab)
+    return tab
+
+def init2(m,n,coord):
+    tab = tableau(m,n)
+    set_bombs2(tab,coord)
     how_many_bombs(tab)
     return tab
 
