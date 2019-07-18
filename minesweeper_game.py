@@ -135,7 +135,7 @@ def init(m,n,percentage):
 
 gameOver = False
 def game(m,n):
-    t = Tableau(4,4,0.10)
+    t = Tableau(m,n,0.10)
     t.display()
     while( not gameOver):
         print("What do you want to do ? :\n 1. Open a case \n 2. Flag a case")
