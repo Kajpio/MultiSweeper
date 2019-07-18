@@ -5,7 +5,7 @@ Spyder Editor
 This is a temporary script file.
 """
 import random
-
+import sys
 class Tableau():
     def __init__(self,longueur,largeur,pourcentage):
         self.tab = init(longueur,largeur,pourcentage)
@@ -18,6 +18,7 @@ class Tableau():
     def open_cases(self,i,j):
         if 0<i<=self.longueur and 0<j<=self.largeur and self.tab[i][j].open == False and self.tab[i][j].flag == False :
             if self.tab[i][j].bombe == True  :
+                gameOver = True
                 return self.game_over
             else :
                 self.tab[i][j].open_case()
@@ -31,6 +32,7 @@ class Tableau():
                                 self.open_cases(i+k-1,j+l-1)
 
     def display(self):
+        print(self.tab)
         return self.tab
     def free_cases(self,i,j):
         if self.tab[i][j].open == True :
@@ -43,13 +45,19 @@ class Tableau():
                         coord.append([i+k-1,j+l-1])
             if flags == self.tab[i][j].n_bombe :
                 for m in range(len(coord)):
-                    if self.tab[coord[m][0]][coord[m][1]].bombe != True:
+                    if self.tab[coord[m][0]][coord[m][1]].bombe == False:
+                        gameOver = True
                         return self.game_over
                 for k in [0,1,2]:
                     for l in [0,1,2]:
                         if self.tab[i+k-1][j+l-1].flag == False and self.tab[i+k-1][j+l-1].open == False :
                             self.open_cases(i+k-1,j+l-1)
-                
+    def flag_case(self, x, y):
+        if self.tab[x][y].open == True:
+            print("already opened")
+        else:
+            self.tab[x][y].flag_case()
+
 class Case():
     def __init__(self,bombe,n_bombe,x,y):
         self.bombe = bombe
@@ -124,3 +132,21 @@ def init(m,n,percentage):
     set_bombs(tab,percentage)
     how_many_bombs(tab)
     return tab
+
+gameOver = False
+def game(m,n):
+    t = Tableau(4,4,0.10)
+    t.display()
+    while( not gameOver):
+        print("What do you want to do ? :\n 1. Open a case \n 2. Flag a case")
+        userInput= input()
+        case = input("Which case ? (x,y) :")
+        caseSplitted = list(map(int, case.split(",")))
+        if(userInput == '1'):
+            t.open_cases(caseSplitted[0], caseSplitted[1])
+        else:
+            t.flag_case(caseSplitted[0], caseSplitted[1])
+        t.display()
+    print("Game over")
+
+game(4,4)
